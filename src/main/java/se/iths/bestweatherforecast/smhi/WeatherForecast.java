@@ -24,12 +24,16 @@ public class WeatherForecast {
 
     @JsonProperty("approvedTime")
     private String approvedTime;
+
     @JsonProperty("referenceTime")
     private String referenceTime;
+
     @JsonProperty("geometry")
     private Geometry geometry;
+
     @JsonProperty("timeSeries")
     private List<TimeSeries> timeSeries = null;
+
 
     @JsonProperty("approvedTime")
     public String getApprovedTime() {

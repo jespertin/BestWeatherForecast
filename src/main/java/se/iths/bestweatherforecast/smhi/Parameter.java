@@ -32,7 +32,7 @@ public class Parameter {
     @JsonProperty("unit")
     private String unit;
     @JsonProperty("values")
-    private List<Integer> values = null;
+    private List<Double> values = null;
 
     @JsonProperty("name")
     public String getName() {
@@ -75,12 +75,12 @@ public class Parameter {
     }
 
     @JsonProperty("values")
-    public List<Integer> getValues() {
+    public List<Double> getValues() {
         return values;
     }
 
     @JsonProperty("values")
-    public void setValues(List<Integer> values) {
+    public void setValues(List<Double> values) {
         this.values = values;
     }
 

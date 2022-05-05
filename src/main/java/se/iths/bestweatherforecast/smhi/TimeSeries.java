@@ -22,6 +22,8 @@ public class TimeSeries {
 
     @JsonProperty("validTime")
     private String validTime;
+
+    //Index 10 är temp i celsius
     @JsonProperty("parameters")
     private List<Parameter> parameters = null;
 
