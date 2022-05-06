@@ -2,6 +2,7 @@ package se.iths.bestweatherforecast;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import se.iths.bestweatherforecast.met.METRestClient;
 import se.iths.bestweatherforecast.smhi.Parameter;
 import se.iths.bestweatherforecast.smhi.SMHIRestClient;
 import se.iths.bestweatherforecast.smhi.TimeSeries;
@@ -17,6 +18,9 @@ public class BestWeatherForecastApplication {
 
 
         SMHIRestClient client = new SMHIRestClient();
+        METRestClient metRestClient = new METRestClient();
+
+        System.out.println(metRestClient.getTemp());
 
         System.out.println(client.getTemp());
 
