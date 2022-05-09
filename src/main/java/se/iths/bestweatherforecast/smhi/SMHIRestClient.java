@@ -23,6 +23,8 @@ public class SMHIRestClient {
 
         TimeSeries seriesPlus24FromNow = null;
 
+        //Kanske man vill ha en metod som returnera korrekt timeseries, sen kan man anropa den
+        // i andra metoder.
         for (TimeSeries series : timeSeries) {
             if (series.getValidTime().contains(oneDayFromNow))
                 seriesPlus24FromNow = series;

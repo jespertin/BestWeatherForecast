@@ -23,7 +23,7 @@ public class TimeSeries {
     @JsonProperty("validTime")
     private String validTime;
 
-    //Index 10 är temp i celsius
+    //Index 10 är temp i celsius. Ibland är det index 1 tydligen, kaos
     @JsonProperty("parameters")
     private List<Parameter> parameters = null;
 
