@@ -1,6 +1,5 @@
 package se.iths.bestweatherforecast.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.iths.bestweatherforecast.met.METRestClient;
 import se.iths.bestweatherforecast.meteo.METEORestClient;
@@ -10,6 +9,7 @@ import se.iths.bestweatherforecast.smhi.SMHIRestClient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class BestWeatherCalculator {
 
     private SMHIRestClient smhiClient;
@@ -25,9 +25,9 @@ public class BestWeatherCalculator {
     }
 
     private void populateForecasts(){
-        forecasts.add(new WeatherForecast(smhiClient.getNameRef(), smhiClient.getTemp(), smhiClient.getPrecipitation()));
-        forecasts.add(new WeatherForecast(metClient.getNameRef(), metClient.getTemp(), metClient.getPrecipitation()));
-        forecasts.add(new WeatherForecast(meteoClient.getNameRef(), meteoClient.getTemp(), meteoClient.getPrecipitation()));
+        forecasts.add(new WeatherForecast(smhiClient.getNAME_REF(), smhiClient.getTemp(), smhiClient.getPrecipitation()));
+        forecasts.add(new WeatherForecast(metClient.getNAME_REF(), metClient.getTemp(), metClient.getPrecipitation()));
+        forecasts.add(new WeatherForecast(meteoClient.getNAME_REF(), meteoClient.getTemp(), meteoClient.getPrecipitation()));
     }
 
     public WeatherForecast getBestWeatherForecast(){

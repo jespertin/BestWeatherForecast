@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BestWeatherForLiljeholmen</title>
+</head>
+<body>
+Optimal Liljeholm's Weather,  <span th:text="${bestForecast.formattedTime}"></span>
+</br>
+Forecast source: <span th:text="${bestForecast.nameRef}"></span>
+</br>
+Precipitation : <span th:text="${bestForecast.precipitation}"></span> mm
+</br>
+Temperature: <span th:text="${bestForecast.temperature}"></span> °C
+
+
+
+</body>
+</html>

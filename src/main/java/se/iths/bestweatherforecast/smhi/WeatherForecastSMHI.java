@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 
 @Generated("jsonschema2pojo")
-public class WeatherForecast {
+public class WeatherForecastSMHI {
 
     @JsonProperty("approvedTime")
     private String approvedTime;

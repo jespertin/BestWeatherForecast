@@ -1,5 +1,7 @@
 package se.iths.bestweatherforecast.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 public class WeatherForecast {
@@ -20,34 +22,20 @@ public class WeatherForecast {
         return nameRef;
     }
 
-    public void setNameRef(String nameRef) {
-        this.nameRef = nameRef;
-    }
-
     public Double getTemperature() {
         return temperature;
-    }
-
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
     }
 
     public Double getPrecipitation() {
         return precipitation;
     }
 
-    public void setPrecipitation(Double precipitation) {
-        this.precipitation = precipitation;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-
-    @Override
-    public String toString() {
-        return "WeatherForecast{" +
-                "nameRef='" + nameRef + '\'' +
-                ", temperature=" + temperature +
-                ", precipitation=" + precipitation +
-                '}';
+    @JsonIgnore
+    public String getFormattedTime() {
+        return dateTime.toString().substring(0, 16).replace("T"," ");
     }
-
 }

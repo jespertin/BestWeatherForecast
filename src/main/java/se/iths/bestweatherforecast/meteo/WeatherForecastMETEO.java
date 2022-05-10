@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "generationtime_ms"
 })
 @Generated("jsonschema2pojo")
-public class WeatherForecastMeteo {
+public class WeatherForecastMETEO {
 
     @JsonProperty("hourly")
     private Hourly hourly;

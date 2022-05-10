@@ -1,32 +1,35 @@
 package se.iths.bestweatherforecast.smhi;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 
+@Component
 public class SMHIRestClient {
 
-    private final String nameRef = "SMHI";
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final String NAME_REF = "SMHI";
+    private final RestTemplate RESTTEMPLATE = new RestTemplate();
     private final String URL = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.0300/lat/59.3110/data.json";
-    private final String oneDayFromNow = LocalDateTime.now().plusDays(1).minusHours(2).toString().substring(0, 13);
-    private final WeatherForecast forecast = restTemplate.getForObject(URL, WeatherForecast.class);
+    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now().plusDays(1).minusHours(2).toString().substring(0, 13);
+    private WeatherForecastSMHI forecast;
 
-    public String getNameRef() {
-        return nameRef;
+    @PostConstruct
+    public void setForecast() {
+        forecast = RESTTEMPLATE.getForObject(URL, WeatherForecastSMHI.class);
     }
 
-    public WeatherForecast getForecast() {
-        WeatherForecast forecastLiljeholmen = restTemplate.getForObject(URL, WeatherForecast.class);
-        return forecastLiljeholmen;
+    public String getNAME_REF() {
+        return NAME_REF;
     }
 
     private TimeSeries getCorrectTimeSeries() {
         return forecast.getTimeSeries()
                 .stream()
-                .filter(timeSeries -> timeSeries.getValidTime().contains(oneDayFromNow))
+                .filter(timeSeries -> timeSeries.getValidTime().contains(TWENTY_FOUR_HOURS_FROM_NOW))
                 .toList()
                 .get(0);
     }
@@ -38,19 +41,18 @@ public class SMHIRestClient {
             if (parameter.getUnit().equalsIgnoreCase("Cel"))
                 return parameter.getValues().get(0);
         }
-        // Kanske inte returna null?
-        return null;
+        throw new NoSuchElementException("Could not find correct time-series");
     }
 
-    public Double getPrecipitation(){
+    public Double getPrecipitation() {
         for (Parameter parameter : getCorrectTimeSeries().getParameters()) {
-            if (parameter.getName().equalsIgnoreCase("pmean")){
+            if (parameter.getName().equalsIgnoreCase("pmean")) {
                 return parameter.getValues().get(0);
             }
         }
-
-        return null;
+        throw new NoSuchElementException("Could not find correct time-series");
     }
+
 }
 
 
