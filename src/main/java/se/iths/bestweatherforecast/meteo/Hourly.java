@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Hourly {
 
     @JsonProperty("precipitation")
-    private List<Integer> precipitation = new ArrayList<Integer>();
+    private List<Double> precipitation = new ArrayList<Double>();
     @JsonProperty("temperature_2m")
     private List<Double> temperature2m = new ArrayList<Double>();
     @JsonProperty("time")
@@ -32,12 +32,12 @@ public class Hourly {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("precipitation")
-    public List<Integer> getPrecipitation() {
+    public List<Double> getPrecipitation() {
         return precipitation;
     }
 
     @JsonProperty("precipitation")
-    public void setPrecipitation(List<Integer> precipitation) {
+    public void setPrecipitation(List<Double> precipitation) {
         this.precipitation = precipitation;
     }
 
