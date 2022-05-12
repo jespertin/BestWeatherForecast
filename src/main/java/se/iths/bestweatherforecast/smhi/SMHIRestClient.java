@@ -2,11 +2,12 @@ package se.iths.bestweatherforecast.smhi;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import javax.annotation.PostConstruct;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.NoSuchElementException;
-
+import java.util.stream.Stream;
 
 @Component
 public class SMHIRestClient {
@@ -14,7 +15,7 @@ public class SMHIRestClient {
     private final String NAME_REF = "SMHI";
     private final RestTemplate RESTTEMPLATE = new RestTemplate();
     private final String URL = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.0300/lat/59.3110/data.json";
-    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now().plusDays(1).minusHours(2).toString().substring(0, 13);
+    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now(ZoneId.of("Z")).plusDays(1).toString().substring(0, 13);
     private WeatherForecastSMHI forecast;
 
     @PostConstruct
@@ -41,7 +42,7 @@ public class SMHIRestClient {
             if (parameter.getUnit().equalsIgnoreCase("Cel"))
                 return parameter.getValues().get(0);
         }
-        throw new NoSuchElementException("Could not find correct time-series");
+        throw new NoSuchElementException("Could not find parameter unit Cel");
     }
 
     public Double getPrecipitation() {
@@ -50,7 +51,7 @@ public class SMHIRestClient {
                 return parameter.getValues().get(0);
             }
         }
-        throw new NoSuchElementException("Could not find correct time-series");
+        throw new NoSuchElementException("Could not find Parameter name pmean");
     }
 
 }

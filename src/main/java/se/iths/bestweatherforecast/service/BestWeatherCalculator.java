@@ -21,7 +21,6 @@ public class BestWeatherCalculator {
         this.smhiClient = smhiClient;
         this.metClient = metClient;
         this.meteoClient = meteoClient;
-        //populateForecasts();
     }
 
     private void populateForecasts(){
@@ -43,10 +42,8 @@ public class BestWeatherCalculator {
             if (bestWeatherForecast.getTemperature()<forecast.getTemperature())
                 bestWeatherForecast = forecast;
 
-            else if (bestWeatherForecast.getTemperature().equals(forecast.getTemperature())){
-
-                if (bestWeatherForecast.getPrecipitation()>forecast.getPrecipitation())
-                    bestWeatherForecast = forecast;
+            else if (bestWeatherForecast.getTemperature().equals(forecast.getTemperature()) && bestWeatherForecast.getPrecipitation()>forecast.getPrecipitation()){
+                 bestWeatherForecast = forecast;
             }
         }
         return bestWeatherForecast;

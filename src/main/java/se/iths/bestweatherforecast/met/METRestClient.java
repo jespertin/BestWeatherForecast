@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.NoSuchElementException;
 
 @Component
@@ -16,8 +17,7 @@ public class METRestClient {
             .defaultHeader(HttpHeaders.USER_AGENT, "whateverNameYouWant")
             .build();
     private final String URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=59.3110&lon=18.0300";
-    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now().plusDays(1).minusHours(2).toString().substring(0, 13);
-
+    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now(ZoneId.of("Z")).plusDays(1).toString().substring(0, 13);
     private WeatherForecastMET forecastMET;
 
     @PostConstruct
