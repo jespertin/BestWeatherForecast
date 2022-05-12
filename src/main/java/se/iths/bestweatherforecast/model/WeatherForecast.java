@@ -2,6 +2,7 @@ package se.iths.bestweatherforecast.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class WeatherForecast {
@@ -36,6 +37,8 @@ public class WeatherForecast {
 
     @JsonIgnore
     public String getFormattedTime() {
-        return dateTime.toString().substring(0, 16).replace("T"," ");
+        LocalDate date = dateTime.toLocalDate();
+        int hour = dateTime.getHour();
+        return date.toString() + " " + hour + ":00";
     }
 }

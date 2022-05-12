@@ -21,7 +21,7 @@ public class BestWeatherCalculator {
         this.smhiClient = smhiClient;
         this.metClient = metClient;
         this.meteoClient = meteoClient;
-        populateForecasts();
+        //populateForecasts();
     }
 
     private void populateForecasts(){
@@ -30,7 +30,13 @@ public class BestWeatherCalculator {
         forecasts.add(new WeatherForecast(meteoClient.getNAME_REF(), meteoClient.getTemp(), meteoClient.getPrecipitation()));
     }
 
+    private void clearForecasts(){
+        forecasts.clear();
+    }
+
     public WeatherForecast getBestWeatherForecast(){
+        clearForecasts();
+        populateForecasts();
         WeatherForecast bestWeatherForecast = forecasts.get(0);
         for (WeatherForecast forecast : forecasts) {
 

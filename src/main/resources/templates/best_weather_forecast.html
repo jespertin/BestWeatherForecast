@@ -4,17 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>BestWeatherForLiljeholmen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
 </head>
-<body>
-Optimal Liljeholm's Weather,  <span th:text="${bestForecast.formattedTime}"></span>
-</br>
-Forecast source: <span th:text="${bestForecast.nameRef}"></span>
-</br>
-Precipitation : <span th:text="${bestForecast.precipitation}"></span> mm
-</br>
-Temperature: <span th:text="${bestForecast.temperature}"></span> °C
+<body style="background-color: lightgoldenrodyellow">
+<div class="h2" style="margin: 20px; margin-left: 40px">Best Weather Forecast</div>
 
+<div class="border border-secondary p-4 rounded; rounded-1"
+     style="background-color: lightyellow; width: 400px; margin: 20px;">
 
+    <h5> Optimal Liljeholm's Weather</h5>
+    <h6><span th:text="${bestForecast.formattedTime}"></span></h6>
+    </br>
+    <b>Forecast Source: </b> <span th:text="${bestForecast.nameRef}"></span>
+    </br>
+    <b>Temperature: </b> <span th:text="${bestForecast.temperature}"></span> °C
+    </br>
+    <b>Precipitation: </b> <span th:text="${bestForecast.precipitation}"></span> mm
+
+</div>
+</div>
 
 </body>
 </html>
