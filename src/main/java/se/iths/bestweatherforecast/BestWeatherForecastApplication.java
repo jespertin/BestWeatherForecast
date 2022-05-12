@@ -23,7 +23,5 @@ public class BestWeatherForecastApplication {
     public static void main(String[] args) {
         SpringApplication.run(BestWeatherForecastApplication.class, args);
 
-        System.out.println(LocalDateTime.now(ZoneId.of("Z")).plusDays(1).toString());
-        System.out.println(LocalDateTime.now(ZoneId.systemDefault()).plusDays(1).toString());
     }
 }

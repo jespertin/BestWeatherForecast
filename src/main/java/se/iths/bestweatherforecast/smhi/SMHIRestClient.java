@@ -2,6 +2,7 @@ package se.iths.bestweatherforecast.smhi;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
 import javax.annotation.PostConstruct;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,22 +16,24 @@ public class SMHIRestClient {
     private final String NAME_REF = "SMHI";
     private final RestTemplate RESTTEMPLATE = new RestTemplate();
     private final String URL = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.0300/lat/59.3110/data.json";
-    private final String TWENTY_FOUR_HOURS_FROM_NOW = LocalDateTime.now(ZoneId.of("Z")).plusDays(1).toString().substring(0, 13);
-    private WeatherForecastSMHI forecast;
-
-    @PostConstruct
-    public void setForecast() {
-        forecast = RESTTEMPLATE.getForObject(URL, WeatherForecastSMHI.class);
-    }
 
     public String getNAME_REF() {
         return NAME_REF;
     }
 
+    private WeatherForecastSMHI getForecastSMHI() {
+        return RESTTEMPLATE.getForObject(URL, WeatherForecastSMHI.class);
+    }
+
+    private String getTimeTwentyFourHoursFromNow() {
+        return LocalDateTime.now(ZoneId.of("Z")).plusDays(1).toString().substring(0, 13);
+    }
+
     private TimeSeries getCorrectTimeSeries() {
-        return forecast.getTimeSeries()
+        return getForecastSMHI()
+                .getTimeSeries()
                 .stream()
-                .filter(timeSeries -> timeSeries.getValidTime().contains(TWENTY_FOUR_HOURS_FROM_NOW))
+                .filter(timeSeries -> timeSeries.getValidTime().contains(getTimeTwentyFourHoursFromNow()))
                 .toList()
                 .get(0);
     }
